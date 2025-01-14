@@ -58,12 +58,15 @@ def main(_):
       os.mkdir(FLAGS.save_path)
 
   # Problem.
+  # problema sono 128 quadratic function (W uniforme e y normale) e ritorna la funzione 
+  # che calcola la media della loss delle 128.
+  # CoordinateWiseDeepLSTM come rete da 20x20
   problem, net_config, net_assignments = util.get_config(FLAGS.problem)
 
   # Optimizer setup.
   optimizer = meta.MetaOptimizer(**net_config)
   minimize = optimizer.meta_minimize(
-      problem, FLAGS.unroll_length,
+      problem, FLAGS.unroll_length, 
       learning_rate=FLAGS.learning_rate,
       net_assignments=net_assignments,
       second_derivatives=FLAGS.second_derivatives)
